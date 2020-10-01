@@ -5,8 +5,8 @@ steps:
 - engines:
   - name: file-browser
     variables:
-    - name: file_browser_port
-      value: reserve_port()
+      - name: file_browser_port
+        value: reserve_port()
     orchestrator:
       type: Orchestrator::MainWithWorkers
       deploy_to_main: true
@@ -25,10 +25,6 @@ steps:
           value: "{{ orchestrator.container.mounts.engine }}/etc/file_manager.db"
         - name: FB_ROOT
           value: "{{ orchestrator.container.workdir }}"
-      main_entrypoint: ''
-      worker_entrypoint: ''
-      main_command: ''
-      worker_command: ''
       snapshot_definition:
         registry_name: docker_hub
         image_name: filebrowser/filebrowser
@@ -37,4 +33,4 @@ steps:
       buttons:
         - node_target: main
           label: Open File Manager
-          url: http://{{ views.buttons.self.node.public_ip }}:{{ vars.file_browser_port }}
+          url: "http://{{ views.buttons.self.node.public_ip }}:{{ vars.file_browser_port }}"
