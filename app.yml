@@ -38,4 +38,4 @@ steps:
       buttons:
         - node_target: main
           label: Open File Manager
-          url: "http://{{ views.buttons.self.node.public_ip }}:{{ vars.file_browser_port }}"
+          url: "http://{{ engines.file-browser.views.buttons.self.node.public_ip }}:{{ engines.file-browser.vars.file_browser_port }}"
