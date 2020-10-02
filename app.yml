@@ -22,18 +22,18 @@ steps:
         workdir: "/work"
         mounts:
           engine: "/etc/ocean"
-          data_stores: "{{ orchestrator.container.workdir }}"
+          data_stores: "{{ engines.file-browser.orchestrator.container.workdir }}"
           ssh: "/home/{{ workspace.user.name }}/.ssh"
       nodes:
         env_vars:
           - name: FB_PORT
-            value: "{{ vars.file_browser_port }}"
+            value: "{{ engines.file-browser.vars.file_browser_port }}"
           - name: FB_NOAUTH
             value: true
           - name: FB_DATABASE
-            value: "{{ orchestrator.container.mounts.engine }}/etc/file_manager.db"
+            value: "{{ engines.file-browser.orchestrator.container.mounts.engine }}/etc/file_manager.db"
           - name: FB_ROOT
-            value: "{{ orchestrator.container.workdir }}"
+            value: "{{ engines.file-browser.orchestrator.container.workdir }}"
     views:
       buttons:
         - node_target: main
