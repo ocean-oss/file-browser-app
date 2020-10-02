@@ -4,31 +4,36 @@ ocean:
 steps:
 - engines:
   - name: file-browser
-    variables:
+    vars:
       - name: file_browser_port
         value: reserve_port()
     orchestrator:
       type: Orchestrator::MainWithWorkers
       deploy_to_main: true
       deploy_to_workers: false
-      container_user: "{{ workspace.user.uid }}:{{ workspace.user.gid }}"
-      container_workdir: "/work"
-      engine_mount: "/etc/ocean"
-      data_stores_mount: "{{ orchestrator.container.workdir }}"
-      ssh_mount: "/home/{{ workspace.user.name }}/.ssh"
-      main_env_vars:
-        - name: FB_PORT
-          value: "{{ vars.file_browser_port }}"
-        - name: FB_NOAUTH
-          value: true
-        - name: FB_DATABASE
-          value: "{{ orchestrator.container.mounts.engine }}/etc/file_manager.db"
-        - name: FB_ROOT
-          value: "{{ orchestrator.container.workdir }}"
-      snapshot_definition:
-        registry_name: docker_hub
-        image_name: filebrowser/filebrowser
-        snapshot_name: latest
+      snapshot:
+        registry:
+          name: docker_hub
+        image:
+          name: filebrowser/filebrowser
+        name: latest
+      container:
+        user: "{{ workspace.user.uid }}:{{ workspace.user.gid }}"
+        workdir: "/work"
+        mounts:
+          engine: "/etc/ocean"
+          data_stores: "{{ orchestrator.container.workdir }}"
+          ssh: "/home/{{ workspace.user.name }}/.ssh"
+      nodes:
+        env_vars:
+          - name: FB_PORT
+            value: "{{ vars.file_browser_port }}"
+          - name: FB_NOAUTH
+            value: true
+          - name: FB_DATABASE
+            value: "{{ orchestrator.container.mounts.engine }}/etc/file_manager.db"
+          - name: FB_ROOT
+            value: "{{ orchestrator.container.workdir }}"
     views:
       buttons:
         - node_target: main
