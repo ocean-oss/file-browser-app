@@ -24,17 +24,17 @@ steps:
           engine: "/etc/ocean"
           data_stores: "{{ engines.file-browser.orchestrator.container.workdir }}"
           ssh: "/home/{{ workspace.user.name }}/.ssh"
-      nodes:
-        main:
-          env_vars:
-            - name: FB_PORT
-              value: "{{ engines.file-browser.vars.file_browser_port }}"
-            - name: FB_NOAUTH
-              value: true
-            - name: FB_DATABASE
-              value: "{{ engines.file-browser.orchestrator.container.mounts.engine }}/etc/file_manager.db"
-            - name: FB_ROOT
-              value: "{{ engines.file-browser.orchestrator.container.workdir }}"
+        nodes:
+          main:
+            env_vars:
+              - name: FB_PORT
+                value: "{{ engines.file-browser.vars.file_browser_port }}"
+              - name: FB_NOAUTH
+                value: true
+              - name: FB_DATABASE
+                value: "{{ engines.file-browser.orchestrator.container.mounts.engine }}/etc/file_manager.db"
+              - name: FB_ROOT
+                value: "{{ engines.file-browser.orchestrator.container.workdir }}"
     views:
       buttons:
         - node_target: main
