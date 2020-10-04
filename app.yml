@@ -35,7 +35,7 @@ steps:
                 value: "{{ engines.file-browser.orchestrator.container.mounts.engine }}/etc/file_manager.db"
               - name: FB_ROOT
                 value: "{{ engines.file-browser.orchestrator.container.workdir }}"
-    views:
+    ui:
       buttons:
         - node_target: main
           label: Open File Manager
