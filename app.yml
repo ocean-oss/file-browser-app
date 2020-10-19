@@ -6,7 +6,7 @@ steps:
   - name: file-browser
     vars:
       - name: file_browser_port
-        value: reserve_port()
+        value: "{% reserve_public_port %}"
     orchestrator:
       type: Orchestrator::MainWithWorkers
       deploy_to_main: true
