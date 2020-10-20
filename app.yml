@@ -8,7 +8,6 @@ steps:
       - name: file_browser_port
         value: "{% reserve_public_port %}"
     orchestrator:
-      type: Orchestrator::MainWithWorkers
       deploy_to_main: true
       deploy_to_workers: false
       snapshot:
