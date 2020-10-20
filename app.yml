@@ -1,6 +1,11 @@
 ---
 ocean:
   version: "1"
+snapshots:
+  - name: filebrowser
+    registry: docker_hub
+    image: filebrowser/filebrowser
+    tag: latest
 steps:
 - engines:
   - name: file-browser
@@ -8,14 +13,9 @@ steps:
       - name: file_browser_port
         value: "{% reserve_public_port %}"
     orchestrator:
+      snapshot_name: filebrowser
       deploy_to_main: true
       deploy_to_workers: false
-      snapshot:
-        registry:
-          name: docker_hub
-        image:
-          name: filebrowser/filebrowser
-        name: latest
       container:
         user: "{{ workspace.user.uid }}:{{ workspace.user.gid }}"
         workdir: "/work"
