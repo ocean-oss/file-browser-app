@@ -8,9 +8,9 @@ snapshots:
     tag: latest
 steps:
 - engines:
-  - name: file-browser
+  - name: browser
     vars:
-      - name: file_browser_port
+      - name: port
         value: "{% reserve_public_port %}"
     orchestrator:
       snapshot_name: filebrowser
@@ -20,21 +20,21 @@ steps:
         workdir: "/work"
         mounts:
           engine: "/etc/ocean"
-          data_stores: "{{ engines.file-browser.orchestrator.container.workdir }}"
+          data_stores: "{{ engines.browser.orchestrator.container.workdir }}"
           ssh: "/home/{{ workspace.user.name }}/.ssh"
         nodes:
           main:
             env_vars:
               - name: FB_PORT
-                value: "{{ engines.file-browser.vars.file_browser_port }}"
+                value: "{{ engines.browser.vars.port }}"
               - name: FB_NOAUTH
                 value: true
               - name: FB_DATABASE
-                value: "{{ engines.file-browser.orchestrator.container.mounts.engine }}/etc/file_manager.db"
+                value: "{{ engines.browser.orchestrator.container.mounts.engine }}/etc/file_manager.db"
               - name: FB_ROOT
-                value: "{{ engines.file-browser.orchestrator.container.workdir }}"
+                value: "{{ engines.browser.orchestrator.container.workdir }}"
     ui:
       buttons:
         - node_target: main
           label: Open File Manager
-          url: "http://{{ engines.file-browser.ui.buttons.self.node.public_ip }}:{{ engines.file-browser.vars.file_browser_port }}"
+          url: "http://{{ engines.browser.ui.buttons.self.node.public_ip }}:{{ engines.browser.vars.port }}"
