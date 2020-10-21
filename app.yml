@@ -30,7 +30,7 @@ steps:
               - name: FB_NOAUTH
                 value: true
               - name: FB_DATABASE
-                value: "{{ engines.browser.orchestrator.container.mounts.engine }}/etc/file_manager.db"
+                value: "{{ engines.browser.orchestrator.container.mounts.engine }}/etc/filebrowser.db"
               - name: FB_ROOT
                 value: "{{ engines.browser.orchestrator.container.workdir }}"
     ui:
