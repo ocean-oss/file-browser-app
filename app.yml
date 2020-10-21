@@ -6,6 +6,10 @@ snapshots:
     registry: docker_hub
     image: filebrowser/filebrowser
     tag: latest
+  - ref: filebrowser
+    registry: docker_hub
+    image: filebrowser/filebrowser
+    tag: latest
 steps:
 - engines:
   - name: file-browser
