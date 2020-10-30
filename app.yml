@@ -19,9 +19,9 @@ steps:
         user: "{{ workspace.user.uid }}:{{ workspace.user.gid }}"
         workdir: "/work"
         mounts:
-          files:
+          app_files:
             - name: filebrowser
-              app_path: filebrowser
+              app_files_path: filebrowser
               container_path: /ocean/etc/filebrowser
               readonly: false
           data_stores: "{{ engines.browser.orchestrator.container.workdir }}"
@@ -34,7 +34,7 @@ steps:
               - name: FB_NOAUTH
                 value: true
               - name: FB_DATABASE
-                value: "{{ engines.browser.orchestrator.container.mounts.files.filebrowser.container_path }}/filebrowser.db"
+                value: "{{ engines.browser.orchestrator.container.mounts.app_files.filebrowser.container_path }}/filebrowser.db"
               - name: FB_ROOT
                 value: "{{ engines.browser.orchestrator.container.workdir }}"
     ui:
