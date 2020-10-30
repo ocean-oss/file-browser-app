@@ -19,7 +19,11 @@ steps:
         user: "{{ workspace.user.uid }}:{{ workspace.user.gid }}"
         workdir: "/work"
         mounts:
-          engine: "/etc/ocean"
+          files:
+            - name: filebrowser
+              app_path: filebrowser
+              container_path: /ocean/etc/filebrowser
+              readonly: false
           data_stores: "{{ engines.browser.orchestrator.container.workdir }}"
           ssh: "/home/{{ workspace.user.name }}/.ssh"
         nodes:
@@ -30,7 +34,7 @@ steps:
               - name: FB_NOAUTH
                 value: true
               - name: FB_DATABASE
-                value: "{{ engines.browser.orchestrator.container.mounts.engine }}/etc/filebrowser.db"
+                value: "{{ engines.browser.orchestrator.container.mounts.files.filebrowser.container_path }}/etc/filebrowser.db"
               - name: FB_ROOT
                 value: "{{ engines.browser.orchestrator.container.workdir }}"
     ui:
