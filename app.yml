@@ -16,7 +16,7 @@ steps:
         default_value: files
         label: File Manager URL
       ports:
-        name: filebrowser
+        name: browser
         public: true
     deployment:
       strategy: main
@@ -31,19 +31,16 @@ steps:
             container_path: /ocean/etc/filebrowser
             readonly: false
         data_stores: "{{ engines.browser.orchestrator.container.workdir }}"
-      nodes:
-        main:
-          env_vars:
-            - name: FB_PORT
-              value: "{{ engines.browser.ports.filebrowser.value }}"
-            - name: FB_NOAUTH
-              value: true
-            - name: FB_DATABASE
-              value: "{{ engines.browser.orchestrator.container.mounts.app_files.filebrowser.container_path }}/filebrowser.db"
-            - name: FB_ROOT
-              value: "{{ engines.browser.orchestrator.container.workdir }}"
+      env_vars:
+        - name: FB_PORT
+          value: "{{ engines.browser.ports.filebrowser.value }}"
+        - name: FB_NOAUTH
+          value: true
+        - name: FB_DATABASE
+          value: "{{ engines.browser.orchestrator.container.mounts.app_files.filebrowser.container_path }}/filebrowser.db"
+        - name: FB_ROOT
+          value: "{{ engines.browser.orchestrator.container.workdir }}"
   ui:
     buttons:
-      - node_target: main
-        label: Open File Manager
-        url: "http://{{ engines.browser.ui.buttons.self.node.public_ip }}:{{ engines.browser.ports.filebrowser.value }}"
+      - label: Open File Manager
+        url: "http://{{ engines.browser.networking.dns.url }}:{{ engines.browser.ports.filebrowser.value }}"
