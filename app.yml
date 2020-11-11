@@ -33,7 +33,7 @@ steps:
         data_stores: "{{ engines.browser.container.workdir }}"
       env_vars:
         - name: FB_PORT
-          value: "{{ engines.browser.ports.filebrowser.value }}"
+          value: "{{ engines.browser.networking.ports.filebrowser.value }}"
         - name: FB_NOAUTH
           value: true
         - name: FB_DATABASE
@@ -43,4 +43,4 @@ steps:
   ui:
     buttons:
       - label: Open File Manager
-        url: "http://{{ engines.browser.networking.dns.url }}:{{ engines.browser.ports.filebrowser.value }}"
+        url: "http://{{ engines.browser.networking.dns.url }}:{{ engines.browser.networking.ports.filebrowser.value }}"
