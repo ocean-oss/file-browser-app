@@ -40,7 +40,7 @@ steps:
           value: "{{ engines.browser.container.mounts.app_files.browser.container_path }}/filebrowser.db"
         - name: FB_ROOT
           value: "{{ engines.browser.container.workdir }}"
-  ui:
-    buttons:
-      - label: Open File Manager
-        url: "http://{{ engines.browser.networking.dns.url }}:{{ engines.browser.networking.ports.browser.value }}"
+    ui:
+      buttons:
+        - label: Open File Manager
+          url: "http://{{ engines.browser.networking.dns.url }}:{{ engines.browser.networking.ports.browser.value }}"
