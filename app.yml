@@ -10,9 +10,11 @@ images:
 steps:
 - engines:
   - name: browser
-    vars:
+    settings:
       - name: password
-        value: "{% generate_uuid %}"
+        label: Password
+        style: input
+        default_value: "{% generate_uuid %}"
     networking:
       dns:
         enabled: true
