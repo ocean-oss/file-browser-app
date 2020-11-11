@@ -1,44 +1,49 @@
 ---
 ocean:
   version: "1"
-snapshots:
+images:
   - name: filebrowser
     registry: docker_hub
     image: filebrowser/filebrowser
     tag: latest
+    snapshottable: false
 steps:
 - engines:
   - name: browser
-    vars:
-      - name: port
-        value: "{% reserve_public_port %}"
-    orchestrator:
-      snapshot_name: filebrowser
-      deployment_strategy: main
-      container:
-        user: "{{ workspace.user.uid }}:{{ workspace.user.gid }}"
-        workdir: "/work"
-        mounts:
-          app_files:
-            - name: filebrowser
-              app_files_path: filebrowser
-              container_path: /ocean/etc/filebrowser
-              readonly: false
-          data_stores: "{{ engines.browser.orchestrator.container.workdir }}"
-          ssh: "/home/{{ workspace.user.name }}/.ssh"
-        nodes:
-          main:
-            env_vars:
-              - name: FB_PORT
-                value: "{{ engines.browser.vars.port }}"
-              - name: FB_NOAUTH
-                value: true
-              - name: FB_DATABASE
-                value: "{{ engines.browser.orchestrator.container.mounts.app_files.filebrowser.container_path }}/filebrowser.db"
-              - name: FB_ROOT
-                value: "{{ engines.browser.orchestrator.container.workdir }}"
-    ui:
-      buttons:
-        - node_target: main
-          label: Open File Manager
-          url: "http://{{ engines.browser.ui.buttons.self.node.public_ip }}:{{ engines.browser.vars.port }}"
+    networking:
+      dns:
+        enabled: true
+        default_value: files
+        label: File Manager URL
+      ports:
+        name: filebrowser
+        public: true
+    deployment:
+      strategy: main
+    container:
+      image_name: filebrowser
+      user: "{{ workspace.user.uid }}:{{ workspace.user.gid }}"
+      workdir: "/work"
+      mounts:
+        app_files:
+          - name: filebrowser
+            app_files_path: filebrowser
+            container_path: /ocean/etc/filebrowser
+            readonly: false
+        data_stores: "{{ engines.browser.orchestrator.container.workdir }}"
+      nodes:
+        main:
+          env_vars:
+            - name: FB_PORT
+              value: "{{ engines.browser.ports.filebrowser.value }}"
+            - name: FB_NOAUTH
+              value: true
+            - name: FB_DATABASE
+              value: "{{ engines.browser.orchestrator.container.mounts.app_files.filebrowser.container_path }}/filebrowser.db"
+            - name: FB_ROOT
+              value: "{{ engines.browser.orchestrator.container.workdir }}"
+  ui:
+    buttons:
+      - node_target: main
+        label: Open File Manager
+        url: "http://{{ engines.browser.ui.buttons.self.node.public_ip }}:{{ engines.browser.ports.filebrowser.value }}"
