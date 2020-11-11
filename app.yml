@@ -30,16 +30,16 @@ steps:
             app_files_path: filebrowser
             container_path: /ocean/etc/filebrowser
             readonly: false
-        data_stores: "{{ engines.browser.orchestrator.container.workdir }}"
+        data_stores: "{{ engines.browser.container.workdir }}"
       env_vars:
         - name: FB_PORT
           value: "{{ engines.browser.ports.filebrowser.value }}"
         - name: FB_NOAUTH
           value: true
         - name: FB_DATABASE
-          value: "{{ engines.browser.orchestrator.container.mounts.app_files.filebrowser.container_path }}/filebrowser.db"
+          value: "{{ engines.browser.container.mounts.app_files.filebrowser.container_path }}/filebrowser.db"
         - name: FB_ROOT
-          value: "{{ engines.browser.orchestrator.container.workdir }}"
+          value: "{{ engines.browser.container.workdir }}"
   ui:
     buttons:
       - label: Open File Manager
