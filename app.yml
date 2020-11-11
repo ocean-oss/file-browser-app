@@ -26,7 +26,7 @@ steps:
       workdir: "/work"
       mounts:
         app_files:
-          - name: filebrowser
+          - name: browser
             app_files_path: filebrowser
             container_path: /ocean/etc/filebrowser
             readonly: false
