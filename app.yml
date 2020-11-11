@@ -16,8 +16,8 @@ steps:
         default_value: files
         label: File Manager URL
       ports:
-        name: browser
-        public: true
+        - name: browser
+          public: true
     deployment:
       strategy: main
     container:
