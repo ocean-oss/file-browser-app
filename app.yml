@@ -14,7 +14,7 @@ steps:
       - name: password
         label: Password
         style: input
-        default_value: "{% generate_uuid %}"
+        default_value: password
     networking:
       dns:
         enabled: true
