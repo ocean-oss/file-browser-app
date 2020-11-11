@@ -27,13 +27,13 @@ steps:
       mounts:
         app_files:
           - name: browser
-            app_files_path: filebrowser
-            container_path: /ocean/etc/filebrowser
+            app_files_path: browser
+            container_path: /ocean/etc/browser
             readonly: false
         data_stores: "{{ engines.browser.container.workdir }}"
       env_vars:
         - name: FB_PORT
-          value: "{{ engines.browser.networking.ports.filebrowser.value }}"
+          value: "{{ engines.browser.networking.ports.browser.value }}"
         - name: FB_NOAUTH
           value: true
         - name: FB_DATABASE
