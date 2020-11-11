@@ -10,6 +10,9 @@ images:
 steps:
 - engines:
   - name: browser
+    vars:
+      - name: password
+        value: "{% generate_uuid %}"
     networking:
       dns:
         enabled: true
@@ -34,8 +37,8 @@ steps:
       env_vars:
         - name: FB_PORT
           value: "{{ engines.browser.networking.ports.browser.value }}"
-        - name: FB_NOAUTH
-          value: true
+        - name: FB_PASSWORD
+          value: "{{ engines.browser.vars.password }}"
         - name: FB_DATABASE
           value: "{{ engines.browser.container.mounts.app_files.browser.container_path }}/filebrowser.db"
         - name: FB_ROOT
