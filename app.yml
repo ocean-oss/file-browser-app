@@ -39,10 +39,8 @@ steps:
       env_vars:
         - name: FB_PORT
           value: "{{ engines.browser.networking.ports.browser.value }}"
-        - name: FB_USERNAME
-          value: "{{ workspace.user.name }}"
-        - name: FB_PASSWORD
-          value: "{{ engines.browser.settings.password.value }}"
+        - name: FB_NOAUTH
+          value: "true"
         - name: FB_DATABASE
           value: "{{ engines.browser.container.mounts.app_files.browser.container_path }}/filebrowser.db"
         - name: FB_ROOT
