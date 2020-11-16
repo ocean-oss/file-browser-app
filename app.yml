@@ -5,7 +5,7 @@ actions:
   name: test
   label: Test
   action_type: toggle
-  default_value: "false
+  default_value: "false"
 images:
   - name: filebrowser
     registry: docker_hub
