@@ -1,11 +1,6 @@
 ---
 ocean:
   version: "1"
-actions:
-  - name: test
-    label: Test
-    type: toggle
-    default_value: "false"
 images:
   - name: filebrowser
     registry: docker_hub
