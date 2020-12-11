@@ -27,7 +27,7 @@ steps:
     container:
       image:
         name: filebrowser
-        editable: false
+        editable: true
       user: "{{ workspace.user.uid }}:{{ workspace.user.gid }}"
       workdir: "/work"
       mounts:
