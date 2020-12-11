@@ -6,14 +6,13 @@ images:
     registry: docker_hub
     image: filebrowser/filebrowser
     tag: latest
-    snapshottable: false
 steps:
 - engines:
   - name: browser
     settings:
       - name: password
         label: Password
-        style: input
+        type: input
         default_value: password
     networking:
       dns:
@@ -26,7 +25,9 @@ steps:
     deployment:
       strategy: main
     container:
-      image_name: filebrowser
+      image:
+        name: filebrowser
+        editable: false
       user: "{{ workspace.user.uid }}:{{ workspace.user.gid }}"
       workdir: "/work"
       mounts:
